@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Profile Page{% endblock title %}
+{% block content %}
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+<!-- Styling taken from bootstrap 5 examples https://getbootstrap.com/docs/5.0/examples/jumbotron/ -->
+  </head>
+  <body>
+    
+<main style="margin-bottom: 5%;">
+  <div class="container py-4">
+    <header class="pb-3 mb-4 border-bottom">
+        <span class="fs-4"></span>
+      </a>
+    </header>
+
+    <div class="p-5 mb-4 bg-light rounded-3">
+      <!-- If statement that changes the profile image if the user doesnt have a profile picture -->
+      {% if user.profile_image|length %}
+      <img style="width: 100px; float:right;" src="{{user.profile_image.url}}" />
+      {% else %}
+      <img style="width: 100px; float:right;" src="{{MEDIA_URL}}/profile.png" />
+      {% endif %}
+      <h1 class="display-5 fw-bold">{{user.username}}</h1>
+      <table style="width: 30%;">
+        <tr>
+          <!-- If statement that displays empty if the user doesn't have a first name -->
+          {% if user.first_name|length %}
+          <td style="font-weight: 600; font-size:large">First Name:</td>
+          <td>{{user.first_name}}</td>
+          {% else %}
+          <td style="font-weight: 600; font-size:large">First Name:</td>
+          <td>Empty</td>
+          {% endif %}
+        </tr>
+        <tr>
+          <!-- If statement that displays empty if the user doesn't have a last name -->
+          {% if user.last_name|length %}
+          <td style="font-weight: 600; font-size:large">Last Name:</td>
+          <td>{{user.last_name}}</td>
+          {% else %}
+          <td style="font-weight: 600; font-size:large">Last Name:</td>
+          <td>Empty</td>
+          {% endif %}
+        </tr>
+        <tr>
+          <td style="font-weight: 600; font-size:large">Date Joined:</td>
+          <td>{{user.date_joined}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="row align-items-md-stretch">
+      <div class="col-md-6">
+        <div class="h-auto p-5 text-white bg-dark rounded-3">
+          <h2>Change Profile</h2>
+          <p></p>
+          <button class="btn btn-outline-light" onclick="location.href = '/profile_edit'">Edit</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="h-auto p-5 bg-light border rounded-3">
+          <h2>Change Password</h2>
+          <p></p>
+          <button class="btn btn-outline-secondary" onclick="location.href = '/password-change/'">Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock content %}

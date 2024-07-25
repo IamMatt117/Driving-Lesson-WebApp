@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Student Timetable
+
+{% endblock %}
+{% block content %}
+
+<!-- Css used to style the page -->
+<style>
+    body {
+        display: under;
+        align-items: center;
+        padding-top: 40px;
+        margin-top: 5%;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+        }
+    table{
+        width: 50vw !important;
+        margin-left: 25%;
+        margin-right: 25% !important;
+        margin-bottom: 10% !important;
+    }
+</style>
+
+
+<br>
+<!-- If statement that displays the timetable if there is existing bookings -->
+{% if booking|length %}
+<table class="table table-striped">
+    <thead>
+        <th>Date</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Lesson No.</th>
+        <th>Instructor</th>
+    </thead>
+    <tbody>
+        {% for booking in booking %}
+            <tr>
+                <td>{{ booking.date }}</td>
+                <td> {{ booking.start_time }}</td>
+                <td> {{ booking.end_time}}</td>
+                <td> {{ booking.lessons }}</td>
+                <td> {{ booking.instructor }}</td>       
+              
+            </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h1>No bookings made</h1>
+{% endif %}
+
+{% endblock %}

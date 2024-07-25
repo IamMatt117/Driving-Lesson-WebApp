@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Order History{% endblock %}
+{% block content %}     
+
+<!-- Css used to style the page -->
+<style>
+    h1, h3 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .container {
+        margin-top: 10%;
+    }
+    body{
+        height: 100%
+    }
+</style>
+
+<body>
+<div class="container">
+  {% if orders|length %}  <!-- Check the length of 'orders' instead of 'order' -->
+<table style="margin-bottom: 5%;" class="table">
+    <h1>Order History</h1>
+  <thead>
+    <tr>
+      <th scope="col">Order</th>
+      <th scope="col">Product Title</th>
+      <th scope="col">Price</th>
+      <th scope="col">Date</th> 
+      
+    </tr>
+  </thead>
+  <tbody>
+    <!-- for loop used to display previous orders -->
+    {% for order in orders %}
+    <tr>
+        <td>{{ order.id }}</td>
+        {% for transaction in order.transactions.all %}
+        <td>{{ transaction.product.title }}</td>
+        <td>€{{ transaction.product.price }}</td>
+        {% endfor %}
+        <td>{{ order.date }}</td>
+    </tr>
+    {% endfor %}    
+  </tbody>
+</table>
+{% else %}
+<h3>No Previous Orders</h3>
+{% endif %}
+</div>
+</body>
+{% endblock %}

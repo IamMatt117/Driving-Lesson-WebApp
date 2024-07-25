@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Order Complete{% endblock %}
+{% block content %}     
+
+<!-- Css used to style the page -->
+<style>
+    h1, h2 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .container {
+        margin-top: 10%;
+    }
+    body{
+        height: 100%
+    }
+</style>
+
+<body>
+<div class="container">
+<table style="margin-bottom: 5%;" class="table">
+    <h1>Order Complete!</h1>
+    <h2>Thank you for your order</h2>
+  <thead>
+    <tr>
+      <th scope="col">Order</th>
+      <th scope="col">Product Title</th>
+      <th scope="col">Price</th>
+      <th scope="col">Date</th> 
+      
+    </tr>
+  </thead>
+  <tbody>
+    <!-- for loop used to display the order details -->
+    {% for transaction in transactions %}
+    <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ transaction.product.title }}</td>
+        <td>€{{ transaction.product.price }}</td>
+        <td> {{order.date}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+</body>
+{% endblock %}
